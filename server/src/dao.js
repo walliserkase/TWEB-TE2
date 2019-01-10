@@ -55,53 +55,54 @@ module.exports = {
   },
 
   findAllMovies: (req, res) => {
-    Movie.find({}, (err, comments) => {
+    Movie.find({}, (err, movies) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(comments);
+        res.json(movies);
       }
     });
   },
 
   addNewMovie: (req, res) => {
-    const comment = new Movie(req.body);
-    comment.save((err, com) => {
+    const movie = new Movie(req.body);
+    movie.save((err, mov) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(com);
+        res.json(mov);
       }
     });
   },
 
   findUser: (req, res) => {
-    User.find({ _id: req.userId }, (err, comments) => {
+    User.find({ _id: req.userId }, (err, user) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(comments);
+        res.json(user);
       }
     });
   },
 
   findUserByName: (req, res) => {
-    User.find({ username: req.username }, (err, comments) => {
+    User.find({ username: req.username }, (err, user) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(comments);
+        res.json(user);
       }
     });
   },
 
   addNewUser: (req, res) => {
     const user = new User(req.body);
-    user.save((err, com) => {
+    user.save((err, usr) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(com);
+    user.save((err, usr) => {
+        res.json(usr);
       }
     });
   },
