@@ -101,7 +101,6 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-    user.save((err, usr) => {
         res.json(usr);
       }
     });
