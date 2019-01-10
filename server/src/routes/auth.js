@@ -3,7 +3,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
-const { jwtOptions } = require('../config');
+const { jwtOptions } = require('../../config');
 const dao = require('../dao');
 
 const router = express.Router();

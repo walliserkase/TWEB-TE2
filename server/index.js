@@ -4,8 +4,8 @@ const cors = require('cors');
 // const bodyParser = require('body-parser');
 const passport = require('passport');
 const { port } = require('./config');
-const api = require('./routes/api');
-const auth = require('./routes/auth');
+const api = require('./src/routes/api');
+const auth = require('./src/routes/auth');
 
 const app = express();
 app.use(cors());
