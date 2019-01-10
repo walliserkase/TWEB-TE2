@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { atlasConnectionString } = require('../config');
 
 const { Schema } = mongoose;
 
@@ -35,7 +36,7 @@ const User = mongoose.model('user', userSchema);
 
 module.exports = {
   connect: () => {
-    mongoose.connect('mongodb+srv://alex:atlaspassword@cluster0-42zus.azure.mongodb.net/test?retryWrites=true', { dbName: 'TE2' });
+    mongoose.connect(atlasConnectionString, { dbName: 'TE2' });
 
     // When successfully connected
     mongoose.connection.on('connected', () => {

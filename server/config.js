@@ -4,4 +4,5 @@ module.exports = {
   jwtOptions: {
     secret: process.env.JWT_SECRET,
   },
+  atlasConnectionString: process.env.ATLAS_CONNECTION_STRING,
 };
