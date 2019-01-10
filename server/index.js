@@ -1,17 +1,16 @@
 require('dotenv/config');
 const express = require('express');
 const cors = require('cors');
-//const bodyParser = require('body-parser');
-const dao = require('./dao');
+// const bodyParser = require('body-parser');
 const passport = require('passport');
 const { port } = require('./config');
 const api = require('./routes/api');
 const auth = require('./routes/auth');
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
-//app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(passport.initialize());
 
 app.use('/api', api);

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const movieSchema = new Schema({
+  _id: Number,
   vote_count: Number,
   video: Boolean,
   vote_average: Number,
@@ -19,6 +20,14 @@ const movieSchema = new Schema({
   genres: Array,
 });
 const Movie = mongoose.model('movie', movieSchema);
+
+const userSchema = new Schema({
+  _id: Number,
+  username: String,
+  password: String,
+  email: String,
+});
+const User = mongoose.model('user', userSchema);
 
 module.exports = {
   connect: () => {
@@ -53,6 +62,27 @@ module.exports = {
   addNewMovie: (req, res) => {
     const comment = new Movie(req.body);
     comment.save((err, com) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(com);
+      }
+    });
+  },
+
+  findUserById: (req, res) => {
+    User.findById(req.userId, (err, comments) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(comments);
+      }
+    });
+  },
+
+  addNewUser: (req, res) => {
+    const user = new User(req.body);
+    user.save((err, com) => {
       if (err) {
         res.send(err);
       } else {
