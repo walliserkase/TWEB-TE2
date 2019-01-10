@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// Création des schémas
+
 const movieSchema = new Schema({
   _id: Number,
   vote_count: Number,
@@ -28,6 +30,8 @@ const userSchema = new Schema({
   email: String,
 });
 const User = mongoose.model('user', userSchema);
+
+// Exportation des méthodes offertes par le DAO
 
 module.exports = {
   connect: () => {
