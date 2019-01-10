@@ -70,8 +70,18 @@ module.exports = {
     });
   },
 
-  findUserById: (req, res) => {
-    User.findById(req.userId, (err, comments) => {
+  findUser: (req, res) => {
+    User.find({ _id: req.userId }, (err, comments) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(comments);
+      }
+    });
+  },
+
+  findUserByName: (req, res) => {
+    User.find({ username: req.username }, (err, comments) => {
       if (err) {
         res.send(err);
       } else {

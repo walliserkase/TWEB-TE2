@@ -6,37 +6,30 @@ const jwt = require('jsonwebtoken');
 const { jwtOptions } = require('../config');
 const dao = require('../dao');
 
-const User = {
-  id: '1234',
-  username: 'admin',
-  password: 'admin',
-};
-
 const router = express.Router();
 const LocalStrategy = passportLocal.Strategy;
 const JWTStrategy = passportJWT.Strategy;
 const { ExtractJwt } = passportJWT;
 
-// on peut ajouter un middleware dans n'importe quel fichier (c'est la même instance)
-// middleware sur TOUTES les requêtes
 passport.use(new LocalStrategy(
-  // paramètres (ces valeurs sont les valeurs par défaut, il n'y aurait techniquement pas besoin de les mettre)
   {
     usernameField: 'username',
     passwordField: 'password',
   },
   // fonction de vérification
   (username, password, done) => {
-    // DB query
-    if (username === User.username && password === User.password) {
-      // 1er param = erreur, 2ème param = user
-      done(null, User);
-    } else {
-      done(null, false);
-    }
+    dao.findUserByName({ username }, (err, user) => {
+      if (username === user.username && password === user.password) {
+        // 1er param = erreur, 2ème param = user
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    });
   },
 ));
 
+// pour le bonus de la watchlist
 passport.use(new JWTStrategy(
   {
     secretOrKey: jwtOptions.secret,
@@ -45,11 +38,13 @@ passport.use(new JWTStrategy(
   },
   (jwtPayload, done) => {
     const { userId } = jwtPayload;
-    if (userId !== User.id) {
-      // l'id dans le token ne correspond à aucun user
-      return done(null, false);
-    }
-    return done(null, User);
+    dao.findUser({ userId }, (err, user) => {
+      if (user) {
+        // l'id dans le token ne correspond à aucun user
+        return done(null, false);
+      }
+      return done(null, user);
+    });
   },
 ));
 
