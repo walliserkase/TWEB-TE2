@@ -6,3 +6,6 @@ Il faut aller sur l'adresse /api pour se connecter à la DB et sur l'adresse /ap
 Import des movies:
 ![alt text](img-readme/terminal-doc-import-ok.JPG)
 ![alt text](img-readme/atlas-doc-import-ok.JPG)
+
+Affichage des films
+![alt text](img-readme/findAllMovies.JPG)
