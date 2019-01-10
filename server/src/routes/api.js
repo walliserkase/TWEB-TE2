@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/movies', (req, res) => {
-  res.send(dao.findAllMovies());
+  dao.findAllMovies(req, res);
 });
 
 module.exports = router;
